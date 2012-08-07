@@ -2,6 +2,16 @@
 <resources>
 
     <string name="app_name">anneau contraceptif</string>
+    <string name="app_version">Version</string>
+    <string name="email">ring@jfma.es \n</string>
+    <string name="company_name">JFMA ™</string>
+    <string name="help_traducing"> Help us translate the application to your language. Write us!</string>
+	<string name="button_calificate">Rate!</string>
+	<string name="instructions"> \n First of all you must select the last day you started
+	    a cycle of the contraceptive ring by clicking on the day in 
+	    the calendar (you can change the month by selecting the arrows to the left 
+	    or right) \n \n Finally you can set your options, as the reminder alarms or themes 
+	    for the calendar in the preferences screen</string>
 
     <string-array name="weekdays_short">
         <item>Lun</item>
