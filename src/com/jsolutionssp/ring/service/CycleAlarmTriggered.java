@@ -12,18 +12,20 @@ import com.jsolutionssp.ring.R;
 import com.jsolutionssp.ring.RingActivity;
 
 public class CycleAlarmTriggered extends BroadcastReceiver {
-    private Context context;
+	private Context context;
 	private SharedPreferences settings;
 
 	@Override
-    public void onReceive(Context context, Intent intent) {
-    	this.context = context;
+	public void onReceive(Context context, Intent intent) {
+		this.context = context;
 		settings = context.getSharedPreferences(RingActivity.PREFS_NAME, 0);
 		int cycle = settings.getInt("cycleAlarm", 0);
 		if (cycle == 1) {
 			String tickerText;
-			int day = settings.getInt("prevAlarmDays", 0);
-			if (day == 0)
+			int day = settings.getInt("prevAlarmDays", -1);
+			if (day == -1)
+				tickerText = null;
+			else if (day == 0)
 				tickerText = context.getResources().getText(R.string.notification_bar_cycle_text3).toString();
 			else if (day == 1) {
 				tickerText = context.getResources().getText(R.string.notification_bar_cycle_text4).toString();
@@ -34,19 +36,20 @@ public class CycleAlarmTriggered extends BroadcastReceiver {
 				tickerText += context.getResources().getText(R.string.notification_bar_cycle_text2).toString();
 			}
 			boolean sound = false;
-			if (settings.getInt("cycleAlarmSound", 0) != 0)
+			if (settings.getInt("cycleAlarmSound", -1) != -1)
 				sound = true;
 			boolean vibrate = false;
-			if (settings.getInt("cycleAlarmVibrate", 0) != 0)
+			if (settings.getInt("cycleAlarmVibrate", -1) != -1)
 				vibrate = true;
 
-			notificate(tickerText, sound, vibrate);
+			if (tickerText != null)
+				notificate(tickerText, sound, vibrate);
 		}
-    }
-    
-    private void notificate(String title, boolean sound, boolean vibrate) {
+	}
 
-    	String ns = Context.NOTIFICATION_SERVICE;
+	private void notificate(String title, boolean sound, boolean vibrate) {
+
+		String ns = Context.NOTIFICATION_SERVICE;
 		NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(ns);
 		int icon = R.drawable.action_bar_icon;
 		long when = System.currentTimeMillis();
@@ -72,7 +75,7 @@ public class CycleAlarmTriggered extends BroadcastReceiver {
 		notification.ledOnMS = 600;
 		notification.ledOffMS = 900;
 		notification.flags |= Notification.FLAG_SHOW_LIGHTS;
-		
+
 		final int HELLO_ID = R.id.preferences_cycle_alarm;
 		mNotificationManager.notify(HELLO_ID, notification);
 	}

@@ -20,16 +20,11 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" >
 
-            <LinearLayout
+                <RelativeLayout
+                xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
                 android:id="@+id/tab1"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="vertical" >
-
-                <RelativeLayout
-                    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent" >
+                android:layout_height="fill_parent" >
 
                         <com.google.ads.AdView 
                             android:layout_alignParentBottom="true"
@@ -37,22 +32,18 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             ads:adSize="BANNER"
-                            ads:adUnitId="a14ec59fafccead"
+                            ads:adUnitId="a14fd9ba0a122f1"
                             android:gravity="bottom|center"
                             ads:loadAdOnCreate="true" >
                         </com.google.ads.AdView>
                         
                         <com.jsolutionssp.ring.gui.CalendarView
                             android:layout_alignParentTop="true"
+                            android:layout_above="@+id/adView"
                             android:id="@+id/main_calendar"
                             android:layout_width="fill_parent"
-                            android:layout_above="@+id/adView"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10px"
-                            android:layout_marginRight="10px"
-                            android:paddingTop="10px" />
+                            android:layout_height="wrap_content"/>
                 </RelativeLayout>
-            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/tab2"

@@ -1,4 +1,4 @@
-//estoy de los repositorios hasta los cojones
+
 package com.jsolutionssp.ring;
 
 import java.util.Calendar;
@@ -25,6 +25,7 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TextView;
@@ -44,7 +45,7 @@ public class RingActivity extends Activity {
 
 	public static String PREFS_NAME = "com.jsolutionssp.ring";
 
-	private static String ANALYTICS_ID = "UA-26947875-3";
+	private static String ANALYTICS_ID = "UA-32596762-1";
 
 	public static final int five_week_calendar = 35;
 
@@ -88,7 +89,7 @@ public class RingActivity extends Activity {
 
 	public void setTabBackground() {
 		if (notFirstTime) {
-			LinearLayout tab = (LinearLayout) findViewById(R.id.tab1);
+			RelativeLayout tab = (RelativeLayout) findViewById(R.id.tab1);
 			tab.setBackgroundResource(ChangeTheme.background);
 		}
 		notFirstTime = true;
@@ -213,7 +214,22 @@ public class RingActivity extends Activity {
 			dialog.show();
 			return true;
 		case R.id.MnuOpt2:
+			final Dialog intructionsDialog = new Dialog(RingActivity.this, R.style.NoTitleDialog);
+			intructionsDialog.setContentView(R.layout.instructions_dialog);
+			TextView dialogText = (TextView) intructionsDialog.findViewById(R.id.info_dialog_text);
+			dialogText.setText(R.string.instructions);
+			Button button1 = (Button) intructionsDialog.findViewById(R.id.info_dialog_button);
+			button1.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					intructionsDialog.dismiss();
+				}
+			});
+			intructionsDialog.show();
+			return true;
+		case R.id.MnuOpt3:
 			finish();
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}

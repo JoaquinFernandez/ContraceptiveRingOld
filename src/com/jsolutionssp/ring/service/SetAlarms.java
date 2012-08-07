@@ -20,20 +20,20 @@ public class SetAlarms extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		SharedPreferences settings = context.getSharedPreferences(RingActivity.PREFS_NAME, 0);
-		int diary = settings.getInt("diaryAlarm", 0);
-		int cycle = settings.getInt("cycleAlarm", 0);
+		int diary = settings.getInt("diaryAlarm", -1);
+		int cycle = settings.getInt("cycleAlarm", -1);
 		int startCycleDayofYear = settings.getInt("startCycleDayofYear", -1);
 		int startCycleYear = settings.getInt("startCycleYear", -1);
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		if (diary == 1 && startCycleDayofYear != -1 && startCycleYear != -1) {
 			long putRingAlarm = RingLogics.putRingAlarm(settings);
-			if (putRingAlarm != 0) {
+			if (putRingAlarm != -1) {
 				Intent alarmIntent = new Intent(context, PutRingAlarmTriggered.class);
 				PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 				alarmManager.set(AlarmManager.RTC_WAKEUP, putRingAlarm,pendingIntent);
 			}
 			long removeRingAlarm = RingLogics.removeRingAlarm(settings);
-			if (removeRingAlarm != 0) {
+			if (removeRingAlarm != -1) {
 				Intent alarmIntent = new Intent(context, RemoveRingAlarmTriggered.class);
 				PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 				alarmManager.set(AlarmManager.RTC_WAKEUP, removeRingAlarm,pendingIntent);
@@ -41,7 +41,7 @@ public class SetAlarms extends BroadcastReceiver {
 		}
 		if (cycle == 1 && startCycleDayofYear != -1 && startCycleYear != -1) {
 			long cycleAlarm = RingLogics.cycleAlarm(settings);
-			if (cycleAlarm != 0) {
+			if (cycleAlarm != -1) {
 				Intent alarmIntent = new Intent(context, CycleAlarmTriggered.class);
 				PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 				alarmManager.set(AlarmManager.RTC_WAKEUP, cycleAlarm,pendingIntent);

@@ -58,7 +58,8 @@ public class RingLogics {
 		int actualHour = calendar.get(Calendar.HOUR_OF_DAY);
 		int actualMinute = calendar.get(Calendar.MINUTE);
 		int putRingDay = 0;
-
+		if (settingHour == -1 || settingMinute == -1)
+			return -1;
 		//check if it has already passed the day
 		if (settingHour < actualHour || (settingHour == actualHour && settingMinute <= actualMinute))
 			actualDay++;
@@ -106,7 +107,8 @@ public class RingLogics {
 		int settingHour = settings.getInt("diaryHourNotification", -1);
 		int settingMinute = settings.getInt("diaryMinuteNotification", -1);
 		int removeRingDay = 0;
-
+		if (settingHour == -1 || settingMinute == -1)
+			return -1;
 		//check if it has already passed the day
 		if (settingHour < actualHour || (settingHour == actualHour && settingMinute <= actualMinute))
 			actualDay++;
@@ -203,10 +205,12 @@ public class RingLogics {
 		int actualYear = calendar.get(Calendar.YEAR);
 
 		//Now we get the hour of the alarm
-		int settingHour = settings.getInt("cycleHourNotification", 0);
-		int settingMinute = settings.getInt("cycleMinuteNotification", 0);
+		int settingHour = settings.getInt("cycleHourNotification", -1);
+		int settingMinute = settings.getInt("cycleMinuteNotification", -1);
 		int actualHour = calendar.get(Calendar.HOUR_OF_DAY);
 		int actualMinute = calendar.get(Calendar.MINUTE);
+		if (settingHour == -1 || settingMinute == -1)
+			return -1;
 		//check if it has already passed the day
 		if (settingHour < actualHour || (settingHour == actualHour && settingMinute <= actualMinute))
 			actualDay++;
