@@ -37,7 +37,7 @@ public class PutRingAlarmTriggered extends BroadcastReceiver {
 
     	String ns = Context.NOTIFICATION_SERVICE;
 		NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(ns);
-		int icon = R.drawable.action_bar_icon;
+		int icon = R.drawable.ring_icon;
 		long when = System.currentTimeMillis();
 
 		Notification notification = new Notification(icon, title, when);
